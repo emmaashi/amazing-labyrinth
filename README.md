@@ -1,1 +1,1 @@
-The Amazing Labyrinth is a popular, multi-player board game published by Ravensburger. Players navigate a constantly shifting maze to collect treasures and reach specific destinations. The board consists of tiles that players slide to create new paths, and introduces several enhancements such as an AI player and the ability to show possible paths.
+
