@@ -1,11 +1,10 @@
 name: Manual Approval
-
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:  # Allows manual triggering for testing
+  workflow_dispatch:
 
 jobs:
   request-approval:
@@ -15,27 +14,21 @@ jobs:
     steps:
       - name: Manual Approval
         id: approval
-        uses: trstringer/manual-approval@v1.9.1
+        uses: trstringer/manual-approval@main
         with:
-          secret: ${{ secrets.APPROVAL_GITHUB_TOKEN }}
-          approvers: emmaashi
-          minimum-approvals: 1
-          issue-title: "Deploy request for amazing-labyrinth"
-          issue-body: "Please approve or deny this deployment. Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          exclude-workflow-initiator-as-approver: false
-          # 👇 Correct input for the target repository
-          issue-repository: 'emmaashi/amazing-labyrinth-approvals'
+            secret: ${{ secrets.APPROVAL_GITHUB_TOKEN }}
+            approvers: emmaashi
+            minimum-approvals: 1
+            issue-title: "Deploy request for amazing-labyrinth"
+            issue-body: "Please approve or deny this deployment."
+            exclude-workflow-initiator-as-approver: false
+            target-repository: amazing-labyrinth-approvals
+            target-repository-owner: emmaashi
 
   build-and-deploy:
     needs: request-approval
     runs-on: ubuntu-latest
     if: needs.request-approval.outputs.approved == 'true'
-    permissions:
-      # These permissions are for the 'build-and-deploy' job itself,
-      # affecting what it can do with the default GITHUB_TOKEN.
-      # They are not directly related to the 'request-approval' step's PAT.
-      issues: write
-      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -43,9 +36,7 @@ jobs:
       - name: Build project
         run: |
           echo "Building the project..."
-          # Add your actual build steps here
 
       - name: Deploy
         run: |
           echo "Deploying the project..."
-          # Add your actual deployment steps here
