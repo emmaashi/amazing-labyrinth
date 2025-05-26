@@ -1,0 +1,24 @@
+name: Java CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '19'
+        distribution: 'temurin'
+
+    - name: Compile and run Java
+      run: |
+        find src -name "*.java" > sources.txt
+        javac @sources.txt
+        java -cp src application.LabyrinthApplication
+      env:
+        CI: true
+
