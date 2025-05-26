@@ -32,10 +32,10 @@ import view.HomeFrame;
 // Application class to run the program
 public class LabyrinthApplication {
 	public static void main(String[] args) {
-		// if (System.getenv("CI") != null) {
-        //     System.out.println("Running in CI: skipping GUI startup.");
-        //     return;
-        // }
+		if (System.getenv("CI") != null) {
+            System.out.println("Running in CI: skipping GUI startup.");
+            return;
+        }
 		// Create the Labryinth Controller Object
 		new HomeFrame();
 	}
