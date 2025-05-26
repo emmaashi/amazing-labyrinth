@@ -16,9 +16,9 @@ jobs:
 
     - name: Compile and run Java
       run: |
+        # Compile all Java files recursively inside src/
         find src -name "*.java" > sources.txt
         javac @sources.txt
-        java -cp src application.LabyrinthApplication
-      env:
-        CI: true
 
+        # Run the main class
+        java -cp src application.LabyrinthApplication
