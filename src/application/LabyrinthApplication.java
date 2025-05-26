@@ -36,7 +36,7 @@ public class LabyrinthApplication {
             System.out.println("Running in CI: skipping GUI startup.");
             return;
         }
-		// Create the Labryinth Controller Object
+		// Create the Labyrinth Controller Object
 		new HomeFrame();
 	}
 }
